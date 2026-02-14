@@ -91,7 +91,7 @@ def main():
     tg_token = env.str("TELEGRAM_BOT_TOKEN")
     admin_id = env.str("TELEGRAM_CHAT_ID")
 
-    qa = parse_questions_answers()
+    questions_answers = parse_questions_answers()
 
     redis_client = redis.Redis(
         host=env.str("REDIS_URL"),
@@ -113,7 +113,7 @@ def main():
                 MessageHandler(
                     Filters.regex("^Новый вопрос$"),
                     partial(handle_new_question_request,
-                            qa=qa,
+                            qa=questions_answers,
                             redis_client=redis_client),
                 )
             ],
@@ -122,13 +122,13 @@ def main():
                     MessageHandler(
                         Filters.regex("^Сдаться$"),
                         partial(handle_give_up,
-                                qa=qa,
+                                qa=questions_answers,
                                 redis_client=redis_client),
                     ),
                     MessageHandler(
                         Filters.text & ~Filters.command,
                         partial(handle_solution_attempt,
-                                qa=qa,
+                                qa=questions_answers,
                                 redis_client=redis_client),
                     ),
                 ],

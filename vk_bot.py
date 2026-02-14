@@ -98,7 +98,7 @@ def main():
     env = Env()
     env.read_env()
 
-    qa = parse_questions_answers()
+    questions_answers = parse_questions_answers()
 
     redis_client = redis.Redis(
         host=env.str("REDIS_URL"),
@@ -118,7 +118,7 @@ def main():
         handler = partial(
             handle_message,
             vk_api=vk_api,
-            qa=qa,
+            qa=questions_answers,
             redis_client=redis_client,
         )
 
