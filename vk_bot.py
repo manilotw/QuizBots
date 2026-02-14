@@ -33,7 +33,7 @@ def send_question(vk_api, user_id, qa, redis_client):
 
 
 def handle_message(event, vk_api, qa, redis_client):
-    user_id = event.user_id
+    user_id = f"vk_{event.user_id}"
     text = event.text.lower()
 
     if text == "начать":

@@ -32,7 +32,7 @@ def start(update, context):
 
 
 def handle_new_question_request(update, context, qa, redis_client):
-    user_id = update.message.from_user.id
+    user_id = f"tg_{update.message.from_user.id}"
     question_text, _ = random.choice(list(qa.items()))
 
     redis_client.set(user_id, question_text)
@@ -42,7 +42,7 @@ def handle_new_question_request(update, context, qa, redis_client):
 
 
 def handle_solution_attempt(update, context, qa, redis_client):
-    user_id = update.message.from_user.id
+    user_id = f"tg_{update.message.from_user.id}"
     user_answer = update.message.text
 
     saved_question = redis_client.get(user_id)
@@ -64,7 +64,7 @@ def handle_solution_attempt(update, context, qa, redis_client):
 
 
 def handle_give_up(update, context, qa, redis_client):
-    user_id = update.message.from_user.id
+    user_id = f"tg_{update.message.from_user.id}"
 
     saved_question = redis_client.get(user_id)
 
