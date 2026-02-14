@@ -16,7 +16,7 @@ from telegram.ext import (
 )
 
 from error_handler import send_error
-from functions import clean_answer, parse_questions_answers
+from questions_parser import clean_answer, parse_questions_answers
 
 
 WAITING_FOR_ANSWER = 1

@@ -10,7 +10,7 @@ from vk_api.longpoll import VkEventType, VkLongPoll
 from vk_api.utils import get_random_id
 
 from error_handler import send_error
-from functions import clean_answer, parse_questions_answers
+from questions_parser import clean_answer, parse_questions_answers
 
 
 def create_keyboard():
